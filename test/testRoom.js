@@ -52,7 +52,7 @@ describe("testing on table module", () => {
     });
 
     describe("GET /price/:min/:max", () => {
-        it("should get all rooms in price range", (done) => {
+        it("should get error in max price", (done) => {
             chai.request(app)
                 .get('/price/100/1d')
                 .end((err, res) => {
