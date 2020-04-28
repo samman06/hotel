@@ -3,9 +3,9 @@ let chaiHttp = require('chai-http');
 let should = chai.should();
 chai.use(chaiHttp);
 const app = require('../index');
-describe("testing on table module", () => {
-
-    describe("GET /", () => {
+describe("testing on room module", async () => {
+    // this.timeout(5000);
+    await describe("GET /", () => {
         it("should get all rooms", (done) => {
             chai.request(app)
                 .get('/')
@@ -16,7 +16,7 @@ describe("testing on table module", () => {
         });
     });
 
-    describe("GET /sort/:name", () => {
+    await describe("GET /sort/:name", () => {
         it("should get all sorted rooms by name", (done) => {
             chai.request(app)
                 .get('/sort/name')
@@ -28,7 +28,7 @@ describe("testing on table module", () => {
         });
     });
 
-    describe("GET /sort/:price", () => {
+    await describe("GET /sort/:price", () => {
         it("should get all sorted rooms by price", (done) => {
             chai.request(app)
                 .get('/sort/price')
@@ -38,11 +38,10 @@ describe("testing on table module", () => {
                 });
         });
     });
-
-    describe("GET /city/:city", () => {
+    await describe("GET /city/:city", () => {
         it("should get all rooms in a city", (done) => {
             chai.request(app)
-                .get('/city/Kshlerinbury')
+                .get('/city/Dedricktown')
                 .end((err, res) => {
                     res.body.should.be.a('Object');
                     res.body.rooms[0].should.be.a('Object');
@@ -50,8 +49,7 @@ describe("testing on table module", () => {
                 });
         });
     });
-
-    describe("GET /price/:min/:max", () => {
+    await describe("GET /price/:min/:max", () => {
         it("should get error in max price", (done) => {
             chai.request(app)
                 .get('/price/100/1d')
@@ -61,7 +59,7 @@ describe("testing on table module", () => {
                 });
         });
     });
-    describe("GET /price/:min/:max", () => {
+    await describe("GET /price/:min/:max", () => {
         it("should get all rooms in price range", (done) => {
             chai.request(app)
                 .get('/price/100/200')
