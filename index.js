@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const axios = require('axios');
+const cors = require('cors');
 
 const keys = require('./configs/keys');
 const mongoose = require('mongoose');
@@ -22,6 +23,7 @@ mongoose.connect(uri, {
 });
 
 // room router
+app.use(cors());
 app.use('/', hotelRouter);
 
 

@@ -6,7 +6,7 @@ class Hotel {
     async getAllRooms(req, res) {
         try {
             const rooms = await roomModels.find();
-            res.json({rooms})
+            res.json(rooms)
         } catch (e) {
             console.log(e);
         }
@@ -18,7 +18,7 @@ class Hotel {
         if (!isValid) return res.json({errors});
         try {
             const rooms = await roomModels.find({city});
-            return res.json({rooms});
+            return res.json(rooms);
         } catch (e) {
             console.log(e);
         }
@@ -30,7 +30,7 @@ class Hotel {
         if (!isValid) return res.json({errors});
         try {
             const rooms = await roomModels.find({name});
-            return res.json({rooms});
+            return res.json(rooms);
         } catch (e) {
             console.log(e);
         }
@@ -42,7 +42,7 @@ class Hotel {
         if (!isValid) return res.json({errors});
         try {
             const rooms = await roomModels.find({date_start: {$gte: start}, date_end: {$lte: end}});
-            return res.json({rooms});
+            return res.json(rooms);
         } catch (e) {
             console.log(e);
         }
@@ -56,7 +56,7 @@ class Hotel {
             const rooms = await roomModels.find({
                 $and: [{price: {$gte: min}}, {price: {$lte: max}}]
             });
-            res.json({rooms});
+            res.json(rooms);
         } catch (e) {
             console.log(e);
         }
@@ -71,23 +71,12 @@ class Hotel {
             const rooms = await roomModels.find({
                 city, $and: [{price: {$gte: min}}, {price: {$lte: max}}]
             });
-            res.json({rooms});
+            res.json(rooms);
         } catch (e) {
             console.log(e);
         }
     };
 
-    async sortRooms(req, res) {
-        const {sort} = req.params;
-        let rooms;
-        try {
-            if (sort === "city") rooms = await roomModels.find().sort({city: 1});
-            else rooms = await roomModels.find().sort({price: 1});
-            res.json({rooms});
-        } catch (e) {
-            console.log(e);
-        }
-    };
 }
 
 const hotelController = new Hotel();

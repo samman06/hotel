@@ -2,9 +2,8 @@ const express = require('express');
 const hotelController = require("../controller/hotelController");
 const hotelRouter = express.Router();
 
-//get all tables
+//get all rooms
 hotelRouter.get('/', async (req, res) => await hotelController.getAllRooms(req, res));
-hotelRouter.get('/sort/:sort', async (req, res) => await hotelController.sortRooms(req, res));
 hotelRouter.get('/city/:city', async (req, res) => await hotelController.getRoomsByCity(req, res));
 hotelRouter.get('/hotel/:name', async (req, res) => await hotelController.getRoomsByHotel(req, res));
 hotelRouter.get('/price/:min/:max', async (req, res) => await hotelController.getRoomsByPrice(req, res));

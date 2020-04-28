@@ -1,0 +1,42 @@
+.App {
+    height: 100%;
+    width: 100%;
+    /*background-image: url("./Styles/bg.jpg");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+img {
+    width: 100%;
+}
+
+.landing {
+    position: relative;
+    background: url('hotel.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+.stw {
+    width: 200px;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+.thumb {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    margin: 2.5%;
+}
+
+.navIBack {
+    background-color: #000000
+}
+
+.marginTable {
+    margin-top: 2%
+}
