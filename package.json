@@ -5,17 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --timeout 15000",
-    "client": "npm start --prefix client"
+    "test": "mocha --timeout 7000",
   },
   "author": "abdelmoneam",
   "license": "ICT",
   "dependencies": {
     "axios": "^0.19.2",
-    "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mongoose": "^5.4.13",
-    "route": "^0.2.5"
+    "mongoose": "^5.4.13"
   },
   "devDependencies": {
     "chai": "^3.2.0",

@@ -3,7 +3,6 @@ const isEmpty = require('./is-empty');
 class validationInputs {
     validateName(name) {
         let errors = {};
-        // ^[0-9]+$/g
         if (name.match(/^[a-zA-Z0-9\s]+$/g) === null)
             errors.name = "hotel name should has chars and numbers and spaces only ";
         return {
@@ -48,13 +47,7 @@ class validationInputs {
     };
 
     validateMulti(city, min, max) {
-        let errors = {};
-        if (city.match(/^[a-zA-Z0-9\s]+$/g) === null)
-            errors.city = "city name should has chars and numbers and spaces only ";
-        if (min.match(/^[0-9]+$/g) === null)
-            errors.min = "price should be a number";
-        if (max.match(/^[0-9]+$/g) === null)
-            errors.max = "price should a number";
+        let errors = {...this.validateCity(city).errors,...this.validatePrice(min,max).errors};
         return {
             errors,
             isValid: isEmpty(errors),
