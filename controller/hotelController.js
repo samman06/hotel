@@ -77,6 +77,17 @@ class Hotel {
         }
     };
 
+    async sortRooms(req, res) {
+        const {sort} = req.params;
+        let rooms;
+        try {
+            if (sort === "city") rooms = await roomModels.find().sort({city: 1});
+            else rooms = await roomModels.find().sort({price: 1});
+            res.json(rooms);
+        } catch (e) {
+            console.log(e);
+        }
+    };
 }
 
 const hotelController = new Hotel();
