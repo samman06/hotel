@@ -14,12 +14,12 @@ class RoomItem extends Component {
                 <div className="col-12">
                     <p className="h3">City : {room.city}</p>
                 </div>
-                {/*<div className="col-12">*/}
-                    {/*<p className="h3">Date Start : {room.date_start}</p>*/}
-                {/*</div>*/}
-                {/*<div className="col-12">*/}
-                    {/*<p className="h3">Date End : {room.date_end}</p>*/}
-                {/*</div>*/}
+                <div className="col-12">
+                    <p className="h3">Date Start : {room.date_start.slice(0,10)}</p>
+                </div>
+                <div className="col-12">
+                    <p className="h3">Date End : {room.date_end.slice(0,10)}</p>
+                </div>
             </div>
         );
     }

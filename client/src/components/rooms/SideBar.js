@@ -1,55 +1,37 @@
 import React from 'react';
 
 class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "", city: "", price: 100
-        };
-    }
-
-    onChange = ({target}) => {
-        let {name, value} = target;
-        if (name === "price") {
-            if (value < 100) value = 100;
-            value = parseInt(value);
-            this.setState({[name]: value});
-
-        } else {
-            this.setState({[name]: value});
-        }
-        if (name === "price") this.props.filterPrice(value);
-        if (name === "name") this.props.filterName(value);
-        if (name === "city") this.props.filterCity(value);
-    };
-
-    searchByAll = () => {
-        const {city, price} = this.state;
-        this.props.searchByAll(city, price);
-    };
+    onChange = ({target}) => this.props.onChange(target);
+    searchByAll = () => this.props.searchByAll();
 
     render() {
-        const {city, price, name} = this.state;
+        const {city, price, name} = this.props;
+        const sideBarStyle = {height: "40px", borderRadius: ".25rem"};
         return (
-            <div className="pl-3 pt-5">
-                <div>
-                    <button className="btn btn-primary" onClick={this.searchByAll}>
-                        price & name
+            <div className="p-2 border h-100" style={{
+                position: "fixed",
+            }}>
+                <div className="pt-5">
+                    <button className="btn btn-success" onClick={this.searchByAll}>
+                        Price & City
                     </button>
                 </div>
-                <div>
+                <div className="pt-3">
                     <h3>-50 Price +50 : </h3>
-                    <input value={price} name="price" type="number" className="form-control"
+                    <input value={price} name="price"
+                           style={sideBarStyle} type="number"
                            onChange={this.onChange}/>
                 </div>
-                <div>
+                <div className="pt-3">
                     <h3>Name : </h3>
-                    <input value={name} name="name" type="text" className="form-control"
+                    <input value={name} name="name"
+                           style={sideBarStyle} type="text"
                            onChange={this.onChange}/>
                 </div>
-                <div>
+                <div className="pt-3">
                     <h3>City : </h3>
-                    <input value={city} name="city" type="text" className="form-control"
+                    <input value={city} name="city"
+                           style={sideBarStyle} type="text"
                            onChange={this.onChange}/>
                 </div>
             </div>
