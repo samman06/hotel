@@ -10,7 +10,7 @@ describe("testing on room module", async () => {
             chai.request(app)
                 .get('/')
                 .end((err, res) => {
-                    res.body.should.be.a('Object');
+                    res.body.should.be.a('Array');
                     done();
                 });
         });
@@ -21,8 +21,7 @@ describe("testing on room module", async () => {
             chai.request(app)
                 .get('/sort/name')
                 .end((err, res) => {
-                    res.body.should.be.a('Object');
-                    res.body.rooms.should.be.a('Array');
+                    res.body.should.be.a('Array');
                     done();
                 });
         });
@@ -33,7 +32,8 @@ describe("testing on room module", async () => {
             chai.request(app)
                 .get('/sort/price')
                 .end((err, res) => {
-                    res.body.should.be.a('Object');
+                    res.body.should.be.a('Array');
+                    res.body[0].city.should.be.a('String');
                     done();
                 });
         });
@@ -43,8 +43,9 @@ describe("testing on room module", async () => {
             chai.request(app)
                 .get('/city/Dedricktown')
                 .end((err, res) => {
-                    res.body.should.be.a('Object');
-                    res.body.rooms[0].should.be.a('Object');
+                    res.body.should.be.a('Array');
+                    res.body[0].should.be.a('Object');
+                    res.body[0].name.should.be.a('String');
                     done();
                 });
         });
@@ -55,6 +56,7 @@ describe("testing on room module", async () => {
                 .get('/price/100/1d')
                 .end((err, res) => {
                     res.body.errors.should.be.a('Object');
+                    res.body.errors.max.should.be.a("String")
                     done();
                 });
         });
@@ -64,7 +66,8 @@ describe("testing on room module", async () => {
             chai.request(app)
                 .get('/price/100/200')
                 .end((err, res) => {
-                    res.body.rooms.should.be.a('Array');
+                    res.body.should.be.a('Array');
+                    res.body[0].should.be.a('Object');
                     done();
                 });
         });

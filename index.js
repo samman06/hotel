@@ -31,7 +31,7 @@ app.use('/', hotelRouter);
 const insertDummyTables = async () => {
     let rooms = await RoomModel.find();
     if (rooms.length !== 0) return;
-    let {data} = await axios.get(keys.API_KEY);
+    let {data} = await axios.get("keys.API_KEY");
     await data.map(room => {
         const newRoom = new RoomModel(room);
         newRoom.save()
