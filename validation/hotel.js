@@ -25,9 +25,12 @@ class validationInputs {
         let errors = {};
         const datePattern = /^((20[2-9][0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
         if (start.match(datePattern) === null)
-            errors.start = "start date should be formatted";
+            errors.start = "start date should be 'YYYY-MM-DD' formatted";
         if (end.match(datePattern) === null)
-            errors.end = "start date should be formatted";
+            errors.end = "start date should be 'YYYY-MM-DD' formatted";
+        if (!errors.start && !errors.end && start > end)
+            errors.start = "start date should be less than end date";
+
         return {
             errors,
             isValid: isEmpty(errors),
@@ -47,7 +50,7 @@ class validationInputs {
     };
 
     validateMulti(city, min, max) {
-        let errors = {...this.validateCity(city).errors,...this.validatePrice(min,max).errors};
+        let errors = {...this.validateCity(city).errors, ...this.validatePrice(min, max).errors};
         return {
             errors,
             isValid: isEmpty(errors),
