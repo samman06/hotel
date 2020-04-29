@@ -64,12 +64,11 @@ class Hotel {
 
     async getRoomsByMultiConditions(req, res) {
         const {city, min, max} = req.params;
-
         const {errors, isValid} = validation.validateMulti(city, min, max);
         if (!isValid) return res.json({errors});
         try {
             const rooms = await roomModels.find({
-                city, $and: [{price: {$gte: min}}, {price: {$lte: max}}]
+                city, $or: [{price: {$gte: min}}, {price: {$lte: max}}]
             });
             res.json(rooms);
         } catch (e) {
