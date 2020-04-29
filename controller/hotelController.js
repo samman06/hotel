@@ -78,11 +78,12 @@ class Hotel {
 
     async sortRooms(req, res) {
         const {sort} = req.params;
+        if (sort !== "name" && sort !== "price") return res.json({errors: "this sort not available"});
         let rooms;
         try {
-            if (sort === "city") rooms = await roomModels.find().sort({city: 1});
+            if (sort === "name") rooms = await roomModels.find().sort({name: 1});
             else rooms = await roomModels.find().sort({price: 1});
-            res.json(rooms);
+            return res.json(rooms);
         } catch (e) {
             console.log(e);
         }
