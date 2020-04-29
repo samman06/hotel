@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {getAllRooms, searchByDate} from "../../service/RoomService"
-import SearchDate from "./SearchDate"
-import SideBar from "./SideBar"
-
-import RoomsData from "./RoomsData"
+import {getAllRooms, searchByDate} from "../../service/RoomService";
+import SearchDate from "./SearchDate";
+import SideBar from "./SideBar";
+import RoomsData from "./RoomsData";
 
 class Rooms extends Component {
     constructor(props) {
@@ -12,12 +11,12 @@ class Rooms extends Component {
             rooms: [], roomsForDisplay: [], errors: {},
             name: "", city: "", price: 0, from: "", to: ""
         };
-    }
+    };
 
     async componentDidMount() {
         let rooms = await getAllRooms();
         this.setState({rooms, roomsForDisplay: rooms})
-    }
+    };
 
     onChange = (target) => {
         let {name, value} = target;
@@ -88,7 +87,7 @@ class Rooms extends Component {
     };
     allRooms = async () => {
         let rooms = await getAllRooms();
-        this.setState({rooms, roomsForDisplay: rooms})
+        this.setState({rooms, roomsForDisplay: rooms, errors: {}, name: "", city: "", price: 0, from: "", to: ""})
     };
 
     render() {
@@ -101,20 +100,36 @@ class Rooms extends Component {
         }
         return (
             <div>
-                <SearchDate from={from} to={to}
-                            onChange={this.onChange}
-                            searchByDate={this.searchByDate}
-                            errors={errors}/>
+                <SearchDate
+                    from={from} to={to}
+                    onChange={this.onChange}
+                    searchByDate={this.searchByDate}
+                    errors={errors}
+                />
                 <div className="row mt-2 ml-0 mr-0">
                     <div className="col-2 m-2">
-                        <SideBar name={name} city={city} price={price}
-                                 onChange={this.onChange}
-                                 filterCity={this.filterCity}
-                                 filterName={this.filterName}
-                                 filterPrice={this.filterPrice}
-                                 searchByAll={this.searchByAll}/>
+                        <SideBar
+                            name={name} city={city} price={price}
+                            onChange={this.onChange}
+                            filterCity={this.filterCity}
+                            filterName={this.filterName}
+                            filterPrice={this.filterPrice}
+                            searchByAll={this.searchByAll}
+                        />
                     </div>
                     <div className="col-9 border m-2">
+                        <div className="mt-3 offset-6">
+                            <button type="button" className="btn btn-success mr-4" onClick={() => this.allRooms()}>
+                                All Rooms
+                            </button>
+                            <button type="button" className="btn btn-primary mr-4"
+                                    onClick={() => this.sortRooms("name")}>
+                                Sort By Name
+                            </button>
+                            <button type="button" className="btn btn-primary" onClick={() => this.sortRooms("price")}>
+                                Sort By Price
+                            </button>
+                        </div>
                         {roomsData}
                     </div>
                 </div>

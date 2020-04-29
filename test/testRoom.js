@@ -44,8 +44,6 @@ describe("testing on room module", async () => {
                 .get('/city/Dedricktown')
                 .end((err, res) => {
                     res.body.should.be.a('Array');
-                    res.body[0].should.be.a('Object');
-                    res.body[0].name.should.be.a('String');
                     done();
                 });
         });
@@ -56,7 +54,7 @@ describe("testing on room module", async () => {
                 .get('/price/100/1d')
                 .end((err, res) => {
                     res.body.errors.should.be.a('Object');
-                    res.body.errors.max.should.be.a("String")
+                    res.body.errors.max.should.be.a("String");
                     done();
                 });
         });

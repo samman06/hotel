@@ -1,30 +1,31 @@
 import React, {Component} from 'react';
-import RoomItem from "./RoomItem";
 
 class RoomsData extends Component {
-    sortByName = (name) => this.props.sortRooms(name);
-    sortByPrice = (price) => this.props.sortRooms(price);
-    allRooms = () => this.props.allRooms();
     render() {
         const {rooms} = this.props;
         const divRoomS = {height: "80vh", overflow: "auto"};
-        const roomItem = rooms.map(room => <RoomItem key={room._id} room={room}/>);
+        const roomsInfo = rooms.map(room => (
+            <div key={room._id} className="col-5 row border mt-2 ml-3 p-2">
+                <div className="col-12">
+                    <p className="h3">Name : {room.name} </p>
+                </div>
+                <div className="col-12">
+                    <p className="h3">Price : {room.price}</p>
+                </div>
+                <div className="col-12">
+                    <p className="h3">City : {room.city}</p>
+                </div>
+                <div className="col-12">
+                    <p className="h3">Date Start : {room.date_start.slice(0, 10)}</p>
+                </div>
+                <div className="col-12">
+                    <p className="h3">Date End : {room.date_end.slice(0, 10)}</p>
+                </div>
+            </div>
+        ));
         return (
-            <div>
-                <div className="mt-3 offset-6">
-                    <button type="button" className="btn btn-success mr-4" onClick={() => this.allRooms()}>
-                        All Rooms
-                    </button>
-                    <button type="button" className="btn btn-primary mr-4" onClick={() => this.sortByName("name")}>
-                        Sort By Name
-                    </button>
-                    <button type="button" className="btn btn-primary" onClick={() => this.sortByPrice("price")}>
-                        Sort By Price
-                    </button>
-                </div>
-                <div className="row" style={divRoomS}>
-                    {roomItem}
-                </div>
+            <div className="row" style={divRoomS}>
+                {roomsInfo}
             </div>
         )
     }
