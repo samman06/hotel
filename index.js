@@ -25,7 +25,17 @@ mongoose.connect(uri, {
 
 // room router
 app.use(cors());
-app.use('/', hotelRouter);
+app.use('/api', hotelRouter);
+
+
+// Server static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 
 const insertDummyTables = async() => {
@@ -38,14 +48,6 @@ const insertDummyTables = async() => {
     });
 };
 insertDummyTables().then();
-//server static assets if in production
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static('client/build'));
-    console.log(process.env.NODE_ENV);
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-}
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
