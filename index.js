@@ -28,10 +28,10 @@ app.use(cors());
 app.use('/', hotelRouter);
 
 
-const insertDummyTables = async () => {
+const insertDummyTables = async() => {
     let rooms = await RoomModel.find();
     if (rooms.length !== 0) return;
-    let {data} = await axios.get("keys.API_KEY");
+    let { data } = await axios.get("keys.API_KEY");
     await data.map(room => {
         const newRoom = new RoomModel(room);
         newRoom.save()
@@ -42,8 +42,8 @@ insertDummyTables().then();
 if (process.env.NODE_ENV === "production") {
     app.use(express.static('client/build'));
     console.log(process.env.NODE_ENV);
-    app.get("/*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build'))
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
 
